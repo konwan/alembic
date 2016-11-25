@@ -22,6 +22,27 @@ target_metadata = None
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
 
+# ----------------------------------------- add to multi model
+def combine_metadata(*args):
+    m = MetaData()
+    for metadata in args:
+        for t in metadata.tables.values():
+            t.tometadata(m)
+    return m
+'''
+our_metadata = MetaData()
+for metadata in (m1, m2, m3):
+    for t in metadata.tables.values():
+         if _your_check_here(t):
+            t.tometadata(our_metadata)
+
+# target_metadata = MetaData()
+# target_metadata = combine_metadata(User.metadata)
+# target_metadata = combine_metadata(Role.Base.metadata, User.Base.metadata)
+'''
+
+
+# ------------------------------------------ add end
 
 def run_migrations_offline():
     """Run migrations in 'offline' mode.
